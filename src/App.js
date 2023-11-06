@@ -4,6 +4,7 @@ import Display from "./components/Display";
 import React, { useState } from "react";
 import ButtonBox from "./components/ButtonBox";
 import Button from "./components/Button";
+
 const toLocaleString = (num) =>
   String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
@@ -21,6 +22,7 @@ const App = () => {
     ["+", 4, 5, 6],
     ["-", 1, 2, 3],
     ["/", "0", ".", "="],
+    ["x"],
   ];
 
   const handleEquals = () => {
@@ -90,11 +92,45 @@ const App = () => {
       result: !calc.operator ? 0 : calc.result,
     });
   };
+
+  const handleKeyPress = (e) => {
+    const handleBackspace = () => {
+      setCalc({
+        ...calc,
+        calcNum: String(calc.calcNum).slice(0, -1),
+      });
+    };
+
+    const keyPressed = e.key;
+    console.log(keyPressed);
+
+    keyPressed === "c"
+      ? handleClear()
+      : keyPressed === "Backspace"
+      ? handleBackspace()
+      : keyPressed === "=" || keyPressed === "Enter"
+      ? handleEquals()
+      : keyPressed === "/"
+      ? handleOperator(keyPressed)
+      : keyPressed === "x"
+      ? handleOperator(keyPressed)
+      : keyPressed === "-"
+      ? handleOperator(keyPressed)
+      : keyPressed === "+"
+      ? handleOperator(keyPressed)
+      : keyPressed === "."
+      ? handleDecimal(keyPressed)
+      : handleNumClick(keyPressed);
+  };
+
   return (
     <React.Fragment>
       <h1 className="pagetitle">calculate </h1>
       <Wrapper>
-        <Display value={calc.calcNum ? calc.calcNum : calc.result} />
+        <Display
+          value={calc.calcNum ? calc.calcNum : calc.result}
+          onKeyPress={(e) => handleKeyPress(e)}
+        />
         <ButtonBox>
           {buttonValues.flat().map((btn, i) => {
             return (
@@ -126,7 +162,7 @@ const App = () => {
           })}
         </ButtonBox>
       </Wrapper>
-      <h3 className="bottomtitle">//made by javi</h3>
+      <p className="bottomtitle">/made by javi</p>
     </React.Fragment>
   );
 };

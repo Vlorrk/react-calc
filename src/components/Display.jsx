@@ -1,10 +1,11 @@
-import { Textfit } from "react-textfit";
-
-const Display = ({ value }) => {
+const Display = ({ value, onKeyPress }) => {
   return (
-    <Textfit className="display" mode="single" max={100}>
-      {value}
-    </Textfit>
+    <input
+      className="display"
+      onKeyDown={onKeyPress}
+      value={value}
+      type="character"
+    />
   );
 };
 

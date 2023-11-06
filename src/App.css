@@ -17,7 +17,7 @@ body {
 }
 .bottomtitle {
   text-align: center;
-  transform: translateY(0%);
+  transform: translateY(900px);
 }
 /*React Components */
 
@@ -28,7 +28,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 350px;
-  height: 370px;
+  height: 400px;
   padding: 10px;
   background-color: darkslategray;
   border-radius: 5%;
@@ -52,8 +52,9 @@ body {
   border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  text-align: right;
   color: black;
   font-weight: bold;
   box-sizing: border-box;
+  font-size: 70px;
 }
